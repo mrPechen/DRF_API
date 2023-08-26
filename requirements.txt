@@ -1,0 +1,5 @@
+django
+djangorestframework
+environs
+drf-yasg
+psycopg2

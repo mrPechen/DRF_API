@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:latest
+    env_file:
+      - ./.env
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - drf_api
+
+  django:
+    container_name: django
+    build:
+      context: .
+    command: >
+      sh -c "cd catalogue_api &&
+             python manage.py migrate &&
+             python manage.py makemigrations &&
+             python manage.py runserver 0.0.0.0:8000 --noreload"
+    ports:
+      - "8000:8000"
+    networks:
+      - drf_api
+    restart: always
+    env_file:
+      - ".env"
+    depends_on:
+      - db
+
+networks:
+  drf_api:
+    driver: bridge
