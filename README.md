@@ -1,6 +1,6 @@
 # Django Rest Framework
 
-Django rest framework API.
+Пример простого Django rest framework API с CRUD оперциями. 
 
 Стэк:
  - Django
